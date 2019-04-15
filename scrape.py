@@ -26,6 +26,7 @@ endpoint = 'https://jobs.blognone.com/search'
 company_endpoint = 'https://jobs.blognone.com/company/'
 company_cover_endpoint = 'https://img.blognone.com/jobs/prod/730x365/cover/'
 company_logo_endpoint = 'https://img.blognone.com/jobs/prod/118x118/logo/'
+job_endpoint = 'https://jobs.blognone.com'
 
 
 # In[96]:
@@ -41,6 +42,7 @@ def parse_data(content):
             company_url = company_endpoint + company_slug
             #company_cover = company_cover_endpoint + company_slug
             job_title = row.select('.css-12vb8u4 span')[0].text
+            job_url = job_endpoint + row['href']
             level = row.select('h4.text-muted')[0].text
             company_logo = row.select('img.img-fluid')[0].attrs['src']
             #company_logo = company_logo_endpoint + company_slug + ".jpg"
@@ -54,7 +56,8 @@ def parse_data(content):
 
             items.append({
                 'job_title': job_title,
-                'level':level ,
+                'job_url': job_url,
+                'level':level,
                 'company_name': company_name,
                 'company_slug': company_slug,
                 'company_logo': company_logo,

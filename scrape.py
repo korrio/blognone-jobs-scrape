@@ -39,11 +39,11 @@ def parse_data(content):
         try:
             company_slug = row['href'].split("/")[2]
             company_url = company_endpoint + company_slug
-            company_cover = company_cover_endpoint + company_slug
+            #company_cover = company_cover_endpoint + company_slug
             job_title = row.select('.css-12vb8u4 span')[0].text
             level = row.select('h4.text-muted')[0].text
-            #company_logo = row.select('img.img-fluid')[0].attrs['src']
-            company_logo = company_logo_endpoint + company_slug + ".jpg"
+            company_logo = row.select('img.img-fluid')[0].attrs['src']
+            #company_logo = company_logo_endpoint + company_slug + ".jpg"
             company_logo_alt = row.select('img.img-fluid')[0].attrs['alt']
             company_name = company_logo_alt.replace('โลโก้บริษัท ', '')
             salary = row.select('span.text-success.css-1msjh1x span')
@@ -58,7 +58,7 @@ def parse_data(content):
                 'company_name': company_name,
                 'company_slug': company_slug,
                 'company_logo': company_logo,
-                'company_cover': company_cover,
+                #'company_cover': company_cover,
                 'company_url': company_url,
                 'salary_min': salary_min,
                 'salary_max': salary_max,
